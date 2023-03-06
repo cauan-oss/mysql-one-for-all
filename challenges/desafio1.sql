@@ -1,24 +1,30 @@
--- Descomente e altere as linhas abaixo:
+DROP DATABASE IF EXISTS SpotifyClone;
 
--- DROP DATABASE IF EXISTS SpotifyClone;
--- CREATE DATABASE IF NOT EXISTS SpotifyClone;
--- CREATE TABLE SpotifyClone.tabela1(
---     coluna1 tipo restricoes,
---     coluna2 tipo restricoes,
---     colunaN tipo restricoes,
--- ) engine = InnoDB;
--- CREATE TABLE SpotifyClone.tabela2(
---     coluna1 tipo restricoes,
---     coluna2 tipo restricoes,
---     colunaN tipo restricoes,
--- ) engine = InnoDB;
--- INSERT INTO SpotifyClone.tabela1 (coluna1, coluna2)
--- VALUES
---   ('exemplo de dados 1', 'exemplo de dados A'),
---   ('exemplo de dados 2', 'exemplo de dados B'),
---   ('exemplo de dados 3', 'exemplo de dados C');
--- INSERT INTO SpotifyClone.tabela2 (coluna1, coluna2)
--- VALUES
---   ('exemplo de dados 1', 'exemplo de dados X'),
---   ('exemplo de dados 2', 'exemplo de dados Y');
--- iniciando o projeto 
+CREATE DATABASE IF NOT EXISTS SpotifyClone;
+
+CREATE TABLE SpotifyClone.usuarios(
+  id INT PRIMARY KEY  AUTO_INCREMENT, 
+  nome_pessoa_usuaria VARCHAR(45) NULL,
+  idade VARCHAR(45) NULL,
+  planos int,
+  data_assinatura not null date,
+  artista int,
+   FOREIGN KEY (id_plano) REFERENCES plano(id_plano),
+   FOREIGN KEY (artista_id) REFERENCES artistas(artista_id)
+) engine = InnoDB;
+
+
+CREATE TABLE SpotifyClone.planos(
+     id_plano INT PRIMARY KEY AUTO_INCREMENT,
+     valor double not null,
+     plano varchar(20) not null
+ ) engine = InnoDB;
+
+ INSERT INTO SpotifyClone.planos(valor, plano)
+ VALUES
+   (0, 'gratuito'), 
+   (7.99, 'familiar'), 
+   (5.99, 'universitario'), 
+   (6.99, 'pessoal');
+   
+   
