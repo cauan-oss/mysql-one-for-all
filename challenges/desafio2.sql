@@ -1,21 +1,11 @@
 DROP DATABASE IF EXISTS SpotifyClone;
 
 CREATE DATABASE IF NOT EXISTS SpotifyClone;
-use SpotifyClone;
+
 CREATE TABLE SpotifyClone.plano(
     plano_id INT PRIMARY KEY AUTO_INCREMENT,
     plano_nome VARCHAR(20) NOT NULL,
     plano_valor DOUBLE NOT NULL
-) engine = InnoDB;
-
-
-CREATE TABLE SpotifyClone.usuario(
-    pessoa_id INT PRIMARY KEY AUTO_INCREMENT,
-    pessoa_nome VARCHAR(60) NOT NULL,
-    pessoa_idade INT NOT NULL,
-    plano_id INT,
-    data_assinatura DATE NOT NULL,
-    FOREIGN KEY (plano_id) REFERENCES plano(plano_id)
 ) engine = InnoDB;
 
 CREATE TABLE SpotifyClone.artistas(
@@ -39,6 +29,15 @@ CREATE TABLE SpotifyClone.cancoes(
     FOREIGN KEY (album_id) REFERENCES album(album_id)
 ) engine = InnoDB;
 
+CREATE TABLE SpotifyClone.usuario(
+    pessoa_id INT PRIMARY KEY AUTO_INCREMENT,
+    pessoa_nome VARCHAR(60) NOT NULL,
+    pessoa_idade INT NOT NULL,
+    plano_id INT,
+    data_assinatura DATE NOT NULL,
+    FOREIGN KEY (plano_id) REFERENCES plano(plano_id)
+) engine = InnoDB;
+
 CREATE TABLE SpotifyClone.seguindo(
     artista_id INT,
     pessoa_id INT,
@@ -48,69 +47,69 @@ CREATE TABLE SpotifyClone.seguindo(
 ) engine = InnoDB;
 
 CREATE TABLE SpotifyClone.historico(
+    historico_id INT PRIMARY KEY AUTO_INCREMENT,
     pessoa_id INT,
     cancao_id INT,
     historico_data_reproducao DATETIME NOT NULL,
-    PRIMARY KEY ( pessoa_id,
-    cancao_id)
     FOREIGN KEY (pessoa_id) REFERENCES pessoa(pessoa_id),
     FOREIGN KEY (cancao_id) REFERENCES cancoes(cancao_id)
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.plano (plano_nome, plano_valor)
 VALUES
-  ('gratuito', 0), 
-  ('universitário', 5.99), 
-  ('pessoal',6.99), 
-  ('familiar', 7.99); 
-  
-  INSERT INTO SpotifyClone.usuario (pessoa_nome, pessoa_idade, plano_id, data_assinatura)
-VALUES
-  ('Barbara Liskov', 82, 1, '2019-10-20'), 
-  ('Robert Cecil Martin', 58, 1, '2017-01-06'), 
-  ('Ada Lovelace', 37, 4, '2017-12-30'), 
-  ('Martin Fowler', 46, '4', '2017-01-17'), 
-  ('Sandi Metz', 58, 4, '2018-04-29'), 
-  ('Paulo Freire', 19, 2, '2018-02-14'),
-  ('Bell Hooks', 26, 2, '2018-01-05'), 
-  ('Christopher Alexander', 85, 3, '2019-06-05'), 
-  ('Judith Butler', 45, 3, '2020-05-13'), 
-  ('Jorge Amado', 58, 3, '2017-02-17'); 
+  ('gratuito', '0'), -- 1
+  ('universitário', '5,99'), -- 2
+  ('pessoal','6,99'), -- 3
+  ('familiar', '7,99'); -- 4
 
-  INSERT INTO SpotifyClone.artistas (artista_nome)
+INSERT INTO SpotifyClone.artistas (artista_nome)
 VALUES
-  ('Beyoncé'),
-  ('Queen'), 
-  ('Elis Regina'), 
-  ('Baco Exu do Blues'),
-  ('Blind Guardian'), 
-  ('Nina Simone'); 
+  ('Beyoncé'), -- 1
+  ('Queen'), -- 2
+  ('Elis Regina'), -- 3
+  ('Baco Exu do Blues'), -- 4
+  ('Blind Guardian'), -- 5
+  ('Nina Simone'); -- 6
 
 INSERT INTO SpotifyClone.album (artista_id, album_nome, album_ano_lancamento)
 VALUES
-  (1, 'Renaissance', '2022'),
-  (2, 'Jazz', '1978'),
-  (2, 'Hot Space', '1982'),
-  (3, 'Falso Brilhante', '1998'),
-  (3, 'Vento de Maio', '2001'), 
-  (4, 'QVVJFA?', '2003'), 
-  (5, 'Somewhere Far Beyond', '2007'),
-  (6, 'I Put A Spell On You', '2012'); 
+  ('Beyoncé', 'Renaissance', '2022'), -- 1
+  ('Queen', 'Jazz', '1978'), -- 2
+  ('Queen', 'Hot Space', '1982'), -- 3
+  ('Elis Regina', 'Falso Brilhante', '1998'), -- 4
+  ('Elis Regina', 'Vento de Maio', '2001'), -- 5
+  ('Baco Exu do Blues', 'QVVJFA?', '2003'), -- 6
+  ('Blind Guardian', 'Somewhere Far Beyond', '2007'), -- 7
+  ('Nina Simone', 'I Put A Spell On You', '2012'); -- 8
 
- INSERT INTO SpotifyClone.cancoes (cancao_nome, cancao_duracao_segundos, album_id)
+
+INSERT INTO SpotifyClone.cancoes (cancao_nome, cancao_duracao_segundos, album_id)
 VALUES
-  ('BREAK MY SOUL', '279', '1'), 
-  ("VIRGO'S GROOVE", '369', '1'), 
-  ('ALIEN SUPERSTAR', '116', '1'),
-  ("Don't Stop Me Now", '203', '2'),
-  ('Under Pressure', '152', '3'),
-  ('Como Nossos Pais', '105', '4'), 
-  ('O Medo de Amar é o Medo de Ser Livre', '207', '5'),
-  ('Samba em Paris', '267', '6'),
-  ("The Bard's Song", '244', '7'), 
-  ('Feeling Good', '100', '8'); 
+  ('BREAK MY SOUL', '279', '1'), -- 1
+  (`VIRGO'S GROOVE`, '369', '1'), -- 2
+  ('ALIEN SUPERSTAR', '116', '1'), -- 3
+  (`Don't Stop Me Now`, '203', '2'), -- 4
+  ('Under Pressure', '152', '3'), -- 5
+  ('Como Nossos Pais', '105', '4'), -- 6
+  ('O Medo de Amar é o Medo de Ser Livre', '207', '5'), -- 7
+  ('Samba em Paris', '267', '6'), -- 8
+  (`The Bard's Song`, '244', '7'), -- 9
+  ('Feeling Good', '100', '8'); -- 101
 
-  INSERT INTO SpotifyClone.seguindo (pessoa_id, artista_id)
+INSERT INTO SpotifyClone.usuario (pessoa_nome, pessoa_idade, plano_id, data_assinatura)
+VALUES
+  ('Barbara Liskov', '82', '1', '2019-10-20'), -- 1
+  ('Robert Cecil Martin', '58', '1', '2017-01-06'), -- 2
+  ('Ada Lovelace', '37', '4', '2017-12-30'), -- 3
+  ('Martin Fowler', '46', '4', '2017-01-17'), -- 4
+  ('Sandi Metz', '58', '4', '2018-04-29'), -- 5
+  ('Paulo Freire', '19', '2', '2018-02-14'), -- 6
+  ('Bell Hooks', '26', '2', '2018-01-05'), -- 7
+  ('Christopher Alexander', '85', '3', '2019-06-05'), -- 8
+  ('Judith Butler', '45', '3', '2020-05-13'), -- 9
+  ('Jorge Amado', '58', '3', '2017-02-17'); -- 10
+
+INSERT INTO SpotifyClone.seguindo (pessoa_id, artista_id)
 VALUES
   ('1', '1'),
   ('1', '2'),
