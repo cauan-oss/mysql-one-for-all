@@ -44,7 +44,7 @@ CREATE TABLE SpotifyClone.seguindo(
     pessoa_id INT,
     PRIMARY KEY (artista_id, pessoa_id),
     FOREIGN KEY (artista_id) REFERENCES artistas(artista_id),
-    FOREIGN KEY (pessoa_id) REFERENCES pessoa(pessoa_id)
+    FOREIGN KEY (pessoa_id) REFERENCES usuario(pessoa_id)
 ) engine = InnoDB;
 
 CREATE TABLE SpotifyClone.historico(
@@ -52,8 +52,8 @@ CREATE TABLE SpotifyClone.historico(
     cancao_id INT,
     historico_data_reproducao DATETIME NOT NULL,
     PRIMARY KEY ( pessoa_id,
-    cancao_id)
-    FOREIGN KEY (pessoa_id) REFERENCES pessoa(pessoa_id),
+    cancao_id),
+    FOREIGN KEY (pessoa_id) REFERENCES usuario(pessoa_id),
     FOREIGN KEY (cancao_id) REFERENCES cancoes(cancao_id)
 ) engine = InnoDB;
 
@@ -75,7 +75,7 @@ VALUES
   ('Bell Hooks', 26, 2, '2018-01-05'), 
   ('Christopher Alexander', 85, 3, '2019-06-05'), 
   ('Judith Butler', 45, 3, '2020-05-13'), 
-  ('Jorge Amado', 58, 3, '2017-02-17'); 
+  ('Jorge Amado', 58, 3, '2017-02-17');
 
   INSERT INTO SpotifyClone.artistas (artista_nome)
 VALUES
