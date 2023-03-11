@@ -5,5 +5,5 @@ FROM
 	SpotifyClone.artistas AS ar
 JOIN
 	SpotifyClone.album AS al ON al.artista_id = ar.artista_id
-WHERE ar.artista_nome = 'ELis Regina'
+WHERE ar.artista_nome = 'Baco Exu do Blues'
 ORDER BY al.album_nome;
