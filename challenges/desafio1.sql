@@ -13,7 +13,7 @@ CREATE TABLE SpotifyClone.usuario(
     pessoa_id INT PRIMARY KEY AUTO_INCREMENT,
     pessoa_nome VARCHAR(60) NOT NULL,
     pessoa_idade INT NOT NULL,
-    plano_id INT,
+    plano_id INT NOT NULL,
     data_assinatura DATE NOT NULL,
     FOREIGN KEY (plano_id) REFERENCES plano(plano_id)
 ) engine = InnoDB;
