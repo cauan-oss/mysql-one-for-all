@@ -5,3 +5,5 @@ SELECT
 FROM SpotifyClone.pessoa pe
 JOIN SpotifyClone.historico hi ON hi.pessoa_id = pe.pessoa_id
 JOIN SpotifyClone.cancoes ca ON ca.cancao_id = hi.cancao_id
+GROUP BY pe.pessoa_nome
+ORDER BY pe.pessoa_nome;
