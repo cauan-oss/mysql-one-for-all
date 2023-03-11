@@ -4,5 +4,5 @@ SELECT
     CONVERT(ROUND(AVG(pl.plano_valor), 2), CHAR) AS faturamento_medio,
     CONVERT(ROUND(SUM(pl.plano_valor), 2), CHAR) AS faturamento_total
 FROM
-	SpotifyClone.pessoa AS pe
+	SpotifyClone.usuario AS pe
     JOIN SpotifyClone.plano AS pl ON pl.plano_id = pe.plano_id;
